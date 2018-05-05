@@ -20,6 +20,7 @@
 		65693B28209D8E3300B8B26F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693B21209D8E3300B8B26F /* FMResultSet.m */; };
 		65693B29209D8E3300B8B26F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693B24209D8E3300B8B26F /* FMDatabaseAdditions.m */; };
 		65693B2C209D8F2A00B8B26F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65693B2B209D8F1A00B8B26F /* libsqlite3.0.tbd */; };
+		65693B2F209DA23000B8B26F /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693B2E209DA23000B8B26F /* NSString+Tools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		65693B23209D8E3300B8B26F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		65693B24209D8E3300B8B26F /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		65693B2B209D8F1A00B8B26F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		65693B2D209DA23000B8B26F /* NSString+Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Tools.h"; sourceTree = "<group>"; };
+		65693B2E209DA23000B8B26F /* NSString+Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Tools.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				65693B0F209D8B5700B8B26F /* main.m */,
 				65693B16209D8B8C00B8B26F /* XXDataBaseManager.h */,
 				65693B17209D8B8C00B8B26F /* XXDataBaseManager.m */,
+				65693B2D209DA23000B8B26F /* NSString+Tools.h */,
+				65693B2E209DA23000B8B26F /* NSString+Tools.m */,
 			);
 			path = XXDataBaseManager;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				65693B27209D8E3300B8B26F /* FMDatabasePool.m in Sources */,
 				65693B29209D8E3300B8B26F /* FMDatabaseAdditions.m in Sources */,
 				65693B02209D8B5700B8B26F /* AppDelegate.m in Sources */,
+				65693B2F209DA23000B8B26F /* NSString+Tools.m in Sources */,
 				65693B28209D8E3300B8B26F /* FMResultSet.m in Sources */,
 				65693B26209D8E3300B8B26F /* FMDatabaseQueue.m in Sources */,
 			);

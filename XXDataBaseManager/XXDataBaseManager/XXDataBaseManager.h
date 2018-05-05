@@ -10,4 +10,10 @@
 
 @interface XXDataBaseManager : NSObject
 
++ (instancetype)sharedDataBase;
++ (instancetype)shareDataBaseWithName:(NSString *)dbName;
++ (instancetype)shareDataBaseWithName:(NSString *)dbName dbPath:(NSString *)dbPath;
+
+- (BOOL)createTableWithName:(NSString *)tableName model:(id)model excludeKeys:(NSArray *)excludeKeys;
+- (BOOL)createTableWithName:(NSString *)tableName dic:(NSDictionary *)dic excludeKeys:(NSArray *)excludeKeys;
 @end
