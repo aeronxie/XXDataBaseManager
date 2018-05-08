@@ -67,12 +67,12 @@ static XXDataBaseManager *_xxdb = nil;
 #pragma mark ---- CURD
 
 - (BOOL)createTableWithName:(NSString *)tableName model:(id)model excludeKeys:(NSArray *)excludeKeys {
-	if (!model || isEmpty(tableName)) {
+	if ([self isExistTable:tableName] || !model || isEmpty(tableName)) {
 		return NO;
 	}
     Class cls = [self convertModelToClass:model];
     
-	NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE %@ (uniqueId  INTEGER PRIMARY KEY,", tableName];
+	NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (uniqueID INTEGER PRIMARY KEY,", tableName];
 	
 	unsigned count = 0;
 	objc_property_t *properties = class_copyPropertyList(cls, &count);
@@ -80,7 +80,7 @@ static XXDataBaseManager *_xxdb = nil;
 	for (NSInteger i = 0; i < count; i++) {
 		NSString *propertyName = [NSString stringWithCString:property_getName(properties[i]) encoding:NSUTF8StringEncoding];
 		
-		if ((excludeKeys && [excludeKeys containsObject:propertyName]) || [propertyName isEqualToString:@"uniqueId"]) continue;
+		if ((excludeKeys && [excludeKeys containsObject:propertyName]) || [propertyName isEqualToString:@"uniqueID"]) continue;
 		
 		NSString *propertyType = [NSString stringWithCString:property_getAttributes(properties[i]) encoding:NSUTF8StringEncoding];
 		
@@ -99,7 +99,7 @@ static XXDataBaseManager *_xxdb = nil;
 	if (isEmpty(tableName) || !dic) {
 		return NO;
 	}
-	NSMutableString *createSQL = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (uniqueid INTEGER PRIMARY KEY,", tableName];
+	NSMutableString *createSQL = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (uniqueID INTEGER PRIMARY KEY,", tableName];
 
 	for (NSString *key in dic.allKeys) {
 		if (excludeKeys && [excludeKeys containsObject:key]) continue;
@@ -121,7 +121,7 @@ static XXDataBaseManager *_xxdb = nil;
     NSMutableArray *values = @[].mutableCopy;
 
     for (NSString *key in keyValues.allKeys) {
-        if (![fieldNames containsObject:key] || [key isEqualToString:@"uniqueId"]) continue;
+        if (![fieldNames containsObject:key]) continue;
         [resultSql appendFormat:@"%@,",key];
         [argumentsSql appendString:@"?,"];
         [values addObject:keyValues[key]];

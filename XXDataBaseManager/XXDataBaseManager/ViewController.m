@@ -11,14 +11,15 @@
 
 @interface Person : NSObject
 
-@property (nonatomic, strong)NSString *name;
-@property (nonatomic, strong)NSNumber *phoneNum;
-@property (nonatomic, strong)NSData *photoData;
-@property (nonatomic, assign)NSInteger luckyNum;
-@property (nonatomic, assign)BOOL sex;
-@property (nonatomic, assign)int age;
-@property (nonatomic, assign)float height;
-@property (nonatomic, assign)double weight;
+@property (nonatomic, assign) NSInteger uniqueID;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *phoneNum;
+@property (nonatomic, strong) NSData *photoData;
+@property (nonatomic, assign) NSInteger luckyNum;
+@property (nonatomic, assign) BOOL sex;
+@property (nonatomic, assign) int age;
+@property (nonatomic, assign) float height;
+@property (nonatomic, assign) double weight;
 
 @end
 
@@ -39,6 +40,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 	Person *per = [Person new];
+	per.uniqueID = arc4random() % 10000000000000;
 	per.name = @"daming";
 	per.phoneNum = @(1004567890000);
 	per.photoData = [NSData data];
