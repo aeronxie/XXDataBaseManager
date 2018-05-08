@@ -133,7 +133,7 @@ static XXDataBaseManager *_xxdb = nil;
     [resultSql deleteCharactersInRange:NSMakeRange(resultSql.length - 1, 1)];
     [resultSql appendFormat:@") values "];
     [resultSql appendString:argumentsSql];
-    BOOL succeed = [_xxdb.fmdb executeQuery:resultSql withArgumentsInArray:values.copy];
+    BOOL succeed = [_xxdb.fmdb executeUpdate:resultSql withArgumentsInArray:values];
     return succeed;
 }
 
@@ -321,7 +321,7 @@ static XXDataBaseManager *_xxdb = nil;
         }
     }
     free(properties);
-    return dic.copy;
+    return dic;
 }
 
 - (NSArray *)getFieldNamesWithTableName:(NSString *)tableName {

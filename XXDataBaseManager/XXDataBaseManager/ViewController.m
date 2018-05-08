@@ -37,8 +37,21 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[[XXDataBaseManager sharedDataBase] createTableWithName:@"person" dic:@{@"name":@"jack",@"age":@"18"} excludeKeys:nil];
+	[[XXDataBaseManager sharedDataBase] createTableWithName:@"user" model:[Person class] excludeKeys:@[@"luckyNum"]];
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	Person *per = [Person new];
+	per.name = @"daming";
+	per.phoneNum = @(1000000000);
+	per.photoData = [NSData data];
+	per.sex = YES;
+	per.age = 1000;
+	per.height = 123;
+	per.height = 60;
+	[[XXDataBaseManager sharedDataBase] insertDataModel:per inTable:@"user"];
+}
+
 
 
 - (void)didReceiveMemoryWarning {
