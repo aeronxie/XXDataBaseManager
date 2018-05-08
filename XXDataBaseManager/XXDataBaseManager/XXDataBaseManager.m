@@ -46,8 +46,7 @@ static XXDataBaseManager *_xxdb = nil;
 			dbName = kDefaultDBName;
 		}
 		if (isEmpty(dbPath)) {
-//            dbPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)        lastObject] stringByAppendingPathComponent:dbName];
-           dbPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:dbName];
+            dbPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)        lastObject] stringByAppendingPathComponent:dbName];
 		} else {
 			dbPath = [dbPath stringByAppendingPathComponent:dbName];
 		}
@@ -73,7 +72,7 @@ static XXDataBaseManager *_xxdb = nil;
 	}
     Class cls = [self convertModelToClass:model];
     
-	NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE %@ (uniqueId TEXT PRIMARY KEY,", tableName];
+	NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE %@ (uniqueId  INTEGER PRIMARY KEY,", tableName];
 	
 	unsigned count = 0;
 	objc_property_t *properties = class_copyPropertyList(cls, &count);
@@ -97,12 +96,11 @@ static XXDataBaseManager *_xxdb = nil;
 }
 
 - (BOOL)createTableWithName:(NSString *)tableName dic:(NSDictionary *)dic excludeKeys:(NSArray *)excludeKeys {
-	
 	if (isEmpty(tableName) || !dic) {
 		return NO;
 	}
 	NSMutableString *createSQL = [[NSMutableString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (uniqueid INTEGER PRIMARY KEY,", tableName];
-	
+
 	for (NSString *key in dic.allKeys) {
 		if (excludeKeys && [excludeKeys containsObject:key]) continue;
 		[createSQL appendFormat:@" %@ %@,", key, dic[key]];
@@ -117,13 +115,13 @@ static XXDataBaseManager *_xxdb = nil;
         return NO;
     }
     NSMutableString *resultSql = [[NSMutableString alloc] initWithFormat:@"INSERT INTO %@ (", tableName];
-    NSMutableString *argumentsSql = [[NSMutableString alloc] initWithFormat:@"("];
+	NSMutableString *argumentsSql = [[NSMutableString alloc] initWithFormat:@"("];
     NSDictionary *keyValues = [self modelToDic:model];
     NSArray *fieldNames = [self getFieldNamesWithTableName:tableName];
     NSMutableArray *values = @[].mutableCopy;
-    
+
     for (NSString *key in keyValues.allKeys) {
-        if (![fieldNames containsObject:key]) continue;
+        if (![fieldNames containsObject:key] || [key isEqualToString:@"uniqueId"]) continue;
         [resultSql appendFormat:@"%@,",key];
         [argumentsSql appendString:@"?,"];
         [values addObject:keyValues[key]];
@@ -133,6 +131,7 @@ static XXDataBaseManager *_xxdb = nil;
     [resultSql deleteCharactersInRange:NSMakeRange(resultSql.length - 1, 1)];
     [resultSql appendFormat:@") values "];
     [resultSql appendString:argumentsSql];
+
     BOOL succeed = [_xxdb.fmdb executeUpdate:resultSql withArgumentsInArray:values];
     return succeed;
 }
