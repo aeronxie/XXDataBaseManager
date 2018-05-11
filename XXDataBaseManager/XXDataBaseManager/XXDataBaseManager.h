@@ -10,10 +10,38 @@
 
 @interface XXDataBaseManager : NSObject
 
+/**
+  Get DataBase
+
+ @return instance
+ */
 + (instancetype)sharedDataBase;
+
+/**
+ Get DataBase
+
+ @param dbName DataBase Name
+ @return instance
+ */
 + (instancetype)shareDataBaseWithName:(NSString *)dbName;
+
+/**
+ Get DataBase
+
+ @param dbName DataBase Name
+ @param dbPath DataBase Path
+ @return instance
+ */
 + (instancetype)shareDataBaseWithName:(NSString *)dbName dbPath:(NSString *)dbPath;
 
+
+/**
+ Create Table
+ @param tableName 表名
+ @param model 数据模型，可以是字符串，对象，类
+ @param excludeKeys 模型中哪些字段不需要创建
+ @return 是否创建成功
+ */
 - (BOOL)createTableWithName:(NSString *)tableName model:(id)model excludeKeys:(NSArray *)excludeKeys;
 - (BOOL)createTableWithName:(NSString *)tableName dic:(NSDictionary *)dic excludeKeys:(NSArray *)excludeKeys;
 

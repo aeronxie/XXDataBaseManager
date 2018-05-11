@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BFB4C7F20A292F4005F24F7 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2BFB4C7E20A292F4005F24F7 /* 1.jpg */; };
 		65693B02209D8B5700B8B26F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693B01209D8B5700B8B26F /* AppDelegate.m */; };
 		65693B05209D8B5700B8B26F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693B04209D8B5700B8B26F /* ViewController.m */; };
 		65693B08209D8B5700B8B26F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65693B06209D8B5700B8B26F /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BFB4C7E20A292F4005F24F7 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		65693AFD209D8B5700B8B26F /* XXDataBaseManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XXDataBaseManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65693B00209D8B5700B8B26F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65693B01209D8B5700B8B26F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				65693B19209D8E2100B8B26F /* FMDB */,
+				2BFB4C7E20A292F4005F24F7 /* 1.jpg */,
 				65693B00209D8B5700B8B26F /* AppDelegate.h */,
 				65693B01209D8B5700B8B26F /* AppDelegate.m */,
 				65693B03209D8B5700B8B26F /* ViewController.h */,
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65693B0D209D8B5700B8B26F /* LaunchScreen.storyboard in Resources */,
+				2BFB4C7F20A292F4005F24F7 /* 1.jpg in Resources */,
 				65693B0A209D8B5700B8B26F /* Assets.xcassets in Resources */,
 				65693B08209D8B5700B8B26F /* Main.storyboard in Resources */,
 			);

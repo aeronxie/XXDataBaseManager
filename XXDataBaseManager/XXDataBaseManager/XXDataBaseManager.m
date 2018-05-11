@@ -161,11 +161,10 @@ static XXDataBaseManager *_xxdb = nil;
     va_start(args, format);
     NSString *where = format ? [[NSString alloc] initWithFormat:format locale:[NSLocale currentLocale] arguments:args] : format;
     va_end(args);
-    NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"DELETE FROM %@  %@", tableName, where];
+    NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"DELETE FROM %@ WHERE %@", tableName, where];
     BOOL succeed = [_xxdb.fmdb executeUpdate:sql];
     return succeed;
 }
-
 
 - (BOOL)deleteAllDataInTable:(NSString *)tableName {
     if (isEmpty(tableName)) {
@@ -219,8 +218,8 @@ static XXDataBaseManager *_xxdb = nil;
         [arguments addObject:parameters[key]];
     }
     [resultSql deleteCharactersInRange:NSMakeRange(resultSql.length - 1, 1)];
-    if (where.length) [resultSql appendFormat:@" where %@", where];
-    BOOL succeed = [_xxdb.fmdb executeQuery:resultSql withArgumentsInArray:arguments.copy];
+    if (where.length) [resultSql appendFormat:@" %@", where];
+    BOOL succeed = [_xxdb.fmdb executeUpdate:resultSql withArgumentsInArray:arguments];
     return succeed;
 }
 
@@ -247,9 +246,9 @@ static XXDataBaseManager *_xxdb = nil;
     }
     free(properties);
     
-    NSMutableString *resultSql = [[NSMutableString alloc] initWithFormat:@"SELECT * FROM %@ %@", tableName, where ? where : @""];
-    __block NSMutableArray *resultArray = @{}.mutableCopy;
-    
+    NSMutableString *resultSql = [[NSMutableString alloc] initWithFormat:@"SELECT * FROM %@  %@", tableName, where ? where : @""];
+    __block NSMutableArray *resultArray = @[].mutableCopy;
+
     [self inTransaction:^(BOOL *rollback) {
         FMResultSet *set = [_xxdb.fmdb executeQuery:resultSql];
         while ([set next]) {
@@ -264,8 +263,8 @@ static XXDataBaseManager *_xxdb = nil;
                 } else if ([nameAndType[name] isEqualToString:SQL_BLOB]) {
                     [model setValue:[set dataForColumn:name] forKey:name];
                 }
-                [resultArray addObject:model];
             }
+            [resultArray addObject:model];
         }
     }];
     return resultArray;
@@ -409,10 +408,10 @@ bool isEmpty(NSString *string) {
 
 - (FMDatabaseQueue *)fmdbQueue {
     if (!_fmdbQueue) {
-        FMDatabaseQueue *fmdb = [FMDatabaseQueue databaseQueueWithPath:_dbPath];
-        self.fmdbQueue = fmdb;
+        FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:_dbPath];
+        self.fmdbQueue = dbQueue;
         [_fmdb close];
-        self.fmdb = [fmdb valueForKey:@"_db"];
+        self.fmdb = [dbQueue valueForKey:@"_db"];
     }
     return _fmdbQueue;
 }
