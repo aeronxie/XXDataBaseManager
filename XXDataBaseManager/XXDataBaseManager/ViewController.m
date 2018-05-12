@@ -81,8 +81,8 @@
     author.height = 145;
     author.weight = 60;
 //    [[XXDataBaseManager sharedDataBase] insertDataModel:author inTable:@"author"];
-//    [[XXDataBaseManager sharedDataBase] deleteDataInTable:@"author" whereFormat:@"name = 'daming7'"];
-    [[XXDataBaseManager sharedDataBase] deleteAllDataInTable:@"author"];
+//    [[XXDataBaseManager sharedDataBase] deleteDataInTable:@"author" whereFormat:@"where name = 'daming7'"];
+//    [[XXDataBaseManager sharedDataBase] deleteAllDataInTable:@"author"];
 //    [[XXDataBaseManager sharedDataBase] deleteTable:@"author"];
 //    [[XXDataBaseManager sharedDataBase] updateDataInTable:@"author" parameters:@{@"name":@"helloworld"} whereFormat:@"where name = 'daming7'"];
 //    [[XXDataBaseManager sharedDataBase] updateDataInTable:@"author" parameters:@{@"name":@"godlike"} whereFormat:nil];
@@ -90,7 +90,6 @@
 //    NSArray *array = [[XXDataBaseManager sharedDataBase] lookupDataInTable:@"author" model:author whereFormat:@"order by uniqueID ASC"];
 //    NSInteger count = [[XXDataBaseManager sharedDataBase] allDataCountInTable:@"author"];
 //    [[XXDataBaseManager sharedDataBase] alterFieldNameInTable:@"author" parameters:@{@"nationality" : @"TEXT"}];
-    NSLog(@"");
 }
 
 - (void)buttonAction2 {

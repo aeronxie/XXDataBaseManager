@@ -161,7 +161,7 @@ static XXDataBaseManager *_xxdb = nil;
     va_start(args, format);
     NSString *where = format ? [[NSString alloc] initWithFormat:format locale:[NSLocale currentLocale] arguments:args] : format;
     va_end(args);
-    NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"DELETE FROM %@ WHERE %@", tableName, where];
+    NSMutableString *sql = [[NSMutableString alloc] initWithFormat:@"DELETE FROM %@  %@", tableName, where];
     BOOL succeed = [_xxdb.fmdb executeUpdate:sql];
     return succeed;
 }
